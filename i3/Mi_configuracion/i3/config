@@ -45,8 +45,10 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # Gaps (requiere i3-gaps)
-gaps inner 10
-gaps outer 10
+gaps top 0
+gaps inner 0
+gaps outer 0
+gaps bottom 0
 
 # Mover ventana a workspaces 1-10
 
@@ -105,6 +107,21 @@ exec --no-startup-id feh --bg-scale $wallpaper
 
 # Opcional: recargar fondo al recargar la config
 exec_always --no-startup-id feh --bg-scale $wallpaper
+
+# -----------------------------
+# Captura de pantalla
+# -----------------------------
+bindsym $mod+p exec sh -c 'scrot ~/Imágenes/captura_$(date +%Y-%m-%d_%H-%M-%S).png'
+
+# -----------------------------
+# Captura de ventana
+# -----------------------------
+bindsym $mod+w exec sh -c 'scrot -u ~/Imágenes/captura_ventana_$(date +%Y-%m-%d_%H-%M-%S).png'
+
+# -----------------------------
+# Captura de recorte
+# -----------------------------
+bindsym $mod+Shift+s exec sh -c 'scrot -s ~/Imágenes/recorte_$(date +%Y-%m-%d_%H-%M-%S).png'
 
 # ============================
 # BAR CONFIG
