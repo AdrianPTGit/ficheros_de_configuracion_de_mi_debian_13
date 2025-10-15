@@ -1,0 +1,126 @@
+# ============================
+# i3 Config - Estilo Premium
+# Debian 13 + i3 v4.24
+# Archivo: `~/.config/i3/config`
+# ============================
+
+# Mod key
+set $mod Mod4
+
+
+# -----------------------------
+# Lanzador de aplicaciones con rofi
+# -----------------------------
+
+# Temas rofi
+
+# Tema squared-everforest
+#bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/themes/squared-everforest.rasi
+
+# Tema spotlight-dark
+bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/themes/spotlight-dark.rasi
+
+
+bindsym $mod+Enter exec alacritty
+
+#Lanzador de aplicaciones dmenu_run
+bindsym $mod+Shift+d exec dmenu_run
+
+#Cerrar ventana activa
+bindsym $mod+Shift+q kill
+
+#Cerrar sesion
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m '¿Salir de i3?' -b 'Sí' 'i3-msg exit'"
+bindsym $mod+Shift+r restart
+
+# Movimiento
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# Layouts
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+
+# Gaps (requiere i3-gaps)
+gaps inner 10
+gaps outer 10
+
+# Mover ventana a workspaces 1-10
+
+# Workspace 1
+set $ws1 "🌐 Web"
+bindsym $mod+Shift+1 move container to workspace 1
+
+# Workspace 2
+bindsym $mod+Shift+2 move container to workspace 2
+
+# Workspace 3
+bindsym $mod+Shift+3 move container to workspace 3
+
+# Workspace 4
+bindsym $mod+Shift+4 move container to workspace 4
+
+# Workspace 5
+bindsym $mod+Shift+5 move container to workspace 5
+
+# Workspace 6
+bindsym $mod+Shift+6 move container to workspace 6
+
+# Workspace 7
+bindsym $mod+Shift+7 move container to workspace 7
+
+# Workspace 8
+bindsym $mod+Shift+8 move container to workspace 8
+
+# Workspace 9
+bindsym $mod+Shift+9 move container to workspace 9
+
+# Workspace 10
+bindsym $mod+Shift+0 move container to workspace 10
+
+# -----------------------------
+# Controles de volumen (PulseAudio)
+# -----------------------------
+
+# Sube el volumen un 5%
+bindsym $mod+Shift+Up   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Baja el volumen un 5%
+bindsym $mod+Shift+Down exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Sonido mute
+bindsym $mod+Shift+m    exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# -----------------------------
+# Fondo de pantalla
+# -----------------------------
+# Ajusta la ruta a tu imagen exacta y con extensión correcta
+set $wallpaper /home/adrian/Imágenes/fondo_pantalla/fondo1.jpeg
+
+# Cargar el fondo al iniciar i3
+exec --no-startup-id feh --bg-scale $wallpaper
+
+# Opcional: recargar fondo al recargar la config
+exec_always --no-startup-id feh --bg-scale $wallpaper
+
+# ============================
+# BAR CONFIG
+# ============================
+bar {
+    status_command i3blocks -c ~/.config/i3blocks/config
+    position top
+    tray_output primary
+    font pango:JetBrainsMono Nerd Font 11
+    colors {
+        background #1e1e2e
+        statusline #cdd6f4
+        separator  #585b70
+        focused_workspace  #89b4fa #89b4fa #1e1e2e
+        active_workspace   #45475a #45475a #cdd6f4
+        inactive_workspace #313244 #313244 #cdd6f4
+        urgent_workspace   #f38ba8 #f38ba8 #1e1e2e
+    }
+}
