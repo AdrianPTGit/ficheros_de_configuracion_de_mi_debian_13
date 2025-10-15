@@ -1,0 +1,38 @@
+[time]
+command=date '+🕒 %H:%M:%S  📅 %d-%m-%Y'
+interval=1
+color=#89b4fa
+
+[cpu]
+command=sh -c 'usage=$(grep "cpu " /proc/stat | awk "{usage=($2+$4)*100/($2+$4+$5)} END {print usage}"); bars=$(printf "%0.s█" $(seq 1 $((usage/5)))); printf " %.0f%% %s" $usage "$bars"'
+interval=2
+color=#f9e2af
+
+[mem]
+command=sh -c 'used=$(free -m | awk "/^Mem/ {print \$3}"); total=$(free -m | awk "/^Mem/ {print \$2}"); percent=$((used*100/total)); bars=$(printf "%0.s█" $(seq 1 $((percent/5)))); printf "💾 %d/%dMB %s" $used $total "$bars"'
+interval=5
+color=#fab387
+
+[disk]
+command=sh -c 'used=$(df --output=pcent /home | tail -1 | tr -d "%"); total=$(df -h /home | awk "NR==2 {print \$2}"); bars=$(printf "%0.s█" $(seq 1 $((used/5)))); printf " %d%% %s (%s)" $used "$bars" "$total"'
+interval=60
+color=#cba6f7
+
+
+[iface]
+command=sh -c 'ip -4 addr show dev wlx00e04c5af130 | grep -oP "(?<=inet\s)\d+(\.\d+){3}" || echo "🌐 offline"'
+interval=10
+color=#a6e3a1
+
+
+[wifi]
+command=sh -c 'ssid=$(/sbin/iwgetid -r 2>/dev/null); [ -z "$ssid" ] && ssid="offline"; printf "📶 %s" "$ssid"'
+interval=10
+color=#a6e3a1
+
+[volume]
+command=sh -c 'vol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk "{print \$5}" | tr -d "%"); bars=$(printf "%0.s█" $(seq 1 $((vol/5)))); printf " %s%% %s" $vol "$bars"'
+interval=5
+color=#f5c2e7
+
+

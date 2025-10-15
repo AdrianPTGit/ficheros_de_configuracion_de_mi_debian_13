@@ -1,0 +1,32 @@
+general {
+    colors = true
+    interval = 5
+}
+
+order += "clock"
+order += "cpu_usage"
+order += "mem"
+order += "temperature"
+order += "net_speed"
+
+clock {
+    format = "🕒 %Y-%m-%d %H:%M:%S"
+}
+
+cpu_usage {
+    format = "💻 CPU: {usage}%"
+}
+
+mem {
+    format = "🧠 RAM: {used_mem}/{total_mem} MB"
+}
+
+temperature {
+    format = "🌡️ {temp}°C"
+}
+
+net_speed {
+    interface = "wlan0"
+    format_up = "🌐 {up}↑ {down}↓"
+    format_down = "🌐 down"
+}
